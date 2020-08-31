@@ -1,0 +1,1078 @@
+2020-03-15 08:31:39,759 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:38)     - 1.connection=oracle.jdbc.driver.T4CConnection@6a6824be
+2020-03-15 08:31:39,761 DEBUG [main] Reservation.WorkDiv (  ResDao.java:342)     - 1.Connection : oracle.jdbc.driver.T4CConnection@6a6824be
+2020-03-15 08:31:39,761 DEBUG [main] Reservation.WorkDiv (  ResDao.java:411)     - 2.query : 
+ SELECT *                                                    FROM(                                                             SELECT b.RES_NUM,                                           b.RES_PASSPORT,                                             b.RES_ENAME,                                                b.RES_BIR,                                                  b.RES_PHONE,                                                b.RES_EMAIL,                                                b.RES_PTYPE,                                                b.RES_GENDER,                                               b.RES_STATE,                                        
+        b.RES_PAY,                                          
+        b.RES_MILEAGE,                                      
+        b.RES_SCODE,                                        
+         b.U_NUM                                            
+  FROM(	                                                  
+  	SELECT ROWNUM as rnum,A.*  	                          
+  	FROM(	                                              
+  		SELECT t1.*                                       
+  		FROM reservation t1                               
+ WHERE SUBSTR(t1.res_num,0,8) like ? 
+ AND RES_STATE like ? 
+ 		ORDER BY SUBSTR(t1.res_num,0,8) DESC              
+  		)A                                                
+  	WHERE rownum <=(?*(?-1)+?)  
+  	)B                                                    
+  WHERE rnum >=(?*(?-1)+1))                
+  CROSS JOIN                                                
+  (                                                         
+      SELECT COUNT(*) TOTAL                                 
+      FROM reservation t1                                   
+ WHERE SUBSTR(t1.res_num,0,8) like ? 
+ AND RES_STATE like ? 
+ )                                                        
+ 
+2020-03-15 08:31:39,800 DEBUG [main] Reservation.WorkDiv (  ResDao.java:416)     - 2.1.PreparedStatement : oracle.jdbc.driver.OraclePreparedStatementWrapper@42dafa95
+2020-03-15 08:31:39,801 DEBUG [main] Reservation.WorkDiv (  ResDao.java:419)     - 3.param : ResVO [resNum=20200306, resPassport=null, resEname=null, resBir=null, resphone=null, resEmail=null, resWay=0, resPtype=0, resGender=0, resState=1, resPay=0, resMileage=0, resScode=null, uNum=null, toString()=DTO [pageSize=10, pageNum=1, total=0, num=0]]
+2020-03-15 08:31:39,813 DEBUG [main] Reservation.WorkDiv (  ResDao.java:464)     - 4.return : [ResVO [resNum=202003060000001, resPassport=1        , resEname=ear, resBir=1991-01-20 00:00:00, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=0, resMileage=0, resScode=20200227           , uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=4, num=0]], ResVO [resNum=202003060000002, resPassport=2        , resEname=aaa, resBir=1991-01-22 00:00:00, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=2, resState=1, resPay=0, resMileage=0, resScode=20200227           , uNum=124, toString()=DTO [pageSize=0, pageNum=0, total=4, num=0]], ResVO [resNum=202003060000005, resPassport=1        , resEname=ear, resBir=1991-01-20 00:00:00, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=0, resMileage=0, resScode=20200227           , uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=4, num=0]], ResVO [resNum=202003060002001, resPassport=1        , resEname=ear, resBir=1991-01-20 00:00:00, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=0, resMileage=0, resScode=20200227           , uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=4, num=0]]]
+2020-03-15 08:31:39,819 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:29)     - ********************************
+2020-03-15 08:31:39,819 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:32)     - ResVO [resNum=202003060000001, resPassport=1        , resEname=ear, resBir=1991-01-20 00:00:00, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=0, resMileage=0, resScode=20200227           , uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=4, num=0]]
+2020-03-15 08:31:39,819 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:32)     - ResVO [resNum=202003060000002, resPassport=2        , resEname=aaa, resBir=1991-01-22 00:00:00, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=2, resState=1, resPay=0, resMileage=0, resScode=20200227           , uNum=124, toString()=DTO [pageSize=0, pageNum=0, total=4, num=0]]
+2020-03-15 08:31:39,819 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:32)     - ResVO [resNum=202003060000005, resPassport=1        , resEname=ear, resBir=1991-01-20 00:00:00, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=0, resMileage=0, resScode=20200227           , uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=4, num=0]]
+2020-03-15 08:31:39,819 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:32)     - ResVO [resNum=202003060002001, resPassport=1        , resEname=ear, resBir=1991-01-20 00:00:00, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=0, resMileage=0, resScode=20200227           , uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=4, num=0]]
+2020-03-15 08:31:39,819 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:34)     - ********************************
+2020-03-15 08:32:41,870 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:38)     - 1.connection=oracle.jdbc.driver.T4CConnection@6a6824be
+2020-03-15 08:32:41,871 DEBUG [main] Reservation.WorkDiv (  ResDao.java:114)     - 1.connection=oracle.jdbc.driver.T4CConnection@6a6824be
+2020-03-15 08:32:41,871 DEBUG [main] Reservation.WorkDiv (  ResDao.java:117)     - 2.Query= SELECT               
+     res_num,         
+     res_passport,    
+     res_ename,       
+     res_bir,         
+     res_phone,       
+     res_email,       
+     res_gender,      
+     res_state,       
+     res_pay,         
+     res_mileage,     
+     res_scode,       
+     u_num            
+ FROM                 
+     reservation      
+WHERE res_num= ?		
+2020-03-15 08:32:41,911 DEBUG [main] Reservation.WorkDiv (  ResDao.java:121)     - 3.param=
+ResVO [resNum=202002230251654, resPassport=null, resEname=null, resBir=null, resphone=null, resEmail=null, resWay=0, resPtype=0, resGender=0, resState=0, resPay=0, resMileage=0, resScode=null, uNum=null, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 08:32:41,923 DEBUG [main] Reservation.WorkDiv (  ResDao.java:147)     - 4.outVO=
+ResVO [resNum=202002230251654, resPassport=1        , resEname=ear, resBir=1991-01-17 00:00:00, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=2, resPay=0, resMileage=0, resScode=20200227           , uNum=125, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 08:32:41,925 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:43)     - ********************************
+2020-03-15 08:32:41,925 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:44)     - outVO=ResVO [resNum=202002230251654, resPassport=1        , resEname=ear, resBir=1991-01-17 00:00:00, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=2, resPay=0, resMileage=0, resScode=20200227           , uNum=125, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 08:32:41,925 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:45)     - ********************************
+2020-03-15 13:03:05,382 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:38)     - 1.connection=oracle.jdbc.driver.T4CConnection@6a6824be
+2020-03-15 13:03:05,383 DEBUG [main] Reservation.WorkDiv (  ResDao.java:161)     - 2.SQL(Query) :
+ UPDATE reservation         
+  SET                        
+       res_num        = ? ,  
+       res_passport   = ? ,  
+       res_ename      = ? ,  
+       res_bir        = ? ,  
+       res_phone      = ? ,  
+       res_email      = ? ,  
+       res_gender     = ? ,  
+       res_state      = ? ,  
+       res_pay        = ? ,  
+       res_mileage    = ? ,  
+       res_scode      = ? ,  
+       u_num          = ?    
+                              
+  WHERE                      
+        res_num   = ?        
+ 
+2020-03-15 13:03:05,422 DEBUG [main] Reservation.WorkDiv (  ResDao.java:164)     - 2.1.PreparedStatement : oracle.jdbc.driver.OraclePreparedStatementWrapper@42dafa95
+2020-03-15 13:03:05,423 DEBUG [main] Reservation.WorkDiv (  ResDao.java:167)     - 3.param : 
+ResVO [resNum=202003070076003, resPassport=1, resEname=ear, resBir=1991-01-20, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=1, resMileage=1, resScode=20200227, uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 13:03:05,426 DEBUG [main] Reservation.WorkDiv (  ResDao.java:185)     - 4.flag : 0
+2020-03-15 13:03:05,428 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:72)     - Flag : 0
+2020-03-15 13:03:05,428 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:78)     - ===========================
+2020-03-15 13:03:05,428 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:79)     - 실패
+2020-03-15 13:03:05,428 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:80)     - ===========================
+2020-03-15 13:03:05,639 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:38)     - 1.connection=oracle.jdbc.driver.T4CConnection@59494225
+2020-03-15 13:03:05,639 DEBUG [main] Reservation.WorkDiv (  ResDao.java:77)     - 1.connection=oracle.jdbc.driver.T4CConnection@59494225
+2020-03-15 13:03:05,639 DEBUG [main] Reservation.WorkDiv (  ResDao.java:80)     - 2.Query= SELECT               
+     res_num,         
+     res_passport,    
+     res_ename,       
+     res_bir,         
+     res_phone,       
+     res_email,       
+     res_gender,      
+     res_state,       
+     res_pay,         
+     res_mileage,     
+     res_scode,       
+     u_num            
+ FROM                 
+     reservation      
+WHERE res_num= ?		
+2020-03-15 13:03:05,640 DEBUG [main] Reservation.WorkDiv (  ResDao.java:84)     - 3.param=
+ResVO [resNum=202003070076003, resPassport=1, resEname=ear, resBir=1991-01-20, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=1, resMileage=1, resScode=20200227, uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 13:03:05,651 DEBUG [main] Reservation.WorkDiv (  ResDao.java:110)     - 4.outVO=
+null
+2020-03-15 13:03:05,652 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:89)     - ********************************
+2020-03-15 13:03:05,652 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:90)     - outVO=null
+2020-03-15 13:03:05,653 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:91)     - ********************************
+2020-03-15 13:05:09,403 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:38)     - 1.connection=oracle.jdbc.driver.T4CConnection@4206a205
+2020-03-15 13:05:20,554 DEBUG [main] Reservation.WorkDiv (  ResDao.java:161)     - 2.SQL(Query) :
+ UPDATE reservation         
+  SET                        
+       res_num        = ? ,  
+       res_passport   = ? ,  
+       res_ename      = ? ,  
+       res_bir        = ? ,  
+       res_phone      = ? ,  
+       res_email      = ? ,  
+       res_gender     = ? ,  
+       res_state      = ? ,  
+       res_pay        = ? ,  
+       res_mileage    = ? ,  
+       res_scode      = ? ,  
+       u_num          = ?    
+                              
+  WHERE                      
+        res_num   = ?        
+ 
+2020-03-15 13:05:36,339 DEBUG [main] Reservation.WorkDiv (  ResDao.java:164)     - 2.1.PreparedStatement : oracle.jdbc.driver.OraclePreparedStatementWrapper@75db5df9
+2020-03-15 13:05:36,339 DEBUG [main] Reservation.WorkDiv (  ResDao.java:167)     - 3.param : 
+ResVO [resNum=202003070076003, resPassport=1, resEname=ear, resBir=1991-01-20, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=1, resMileage=1, resScode=20200227, uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 13:05:59,146 DEBUG [main] Reservation.WorkDiv (  ResDao.java:185)     - 4.flag : 0
+2020-03-15 13:06:37,757 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:72)     - Flag : 0
+2020-03-15 13:06:37,757 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:78)     - ===========================
+2020-03-15 13:06:37,757 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:79)     - 실패
+2020-03-15 13:06:37,757 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:80)     - ===========================
+2020-03-15 13:06:37,788 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:38)     - 1.connection=oracle.jdbc.driver.T4CConnection@38102d01
+2020-03-15 13:06:37,788 DEBUG [main] Reservation.WorkDiv (  ResDao.java:77)     - 1.connection=oracle.jdbc.driver.T4CConnection@38102d01
+2020-03-15 13:06:37,788 DEBUG [main] Reservation.WorkDiv (  ResDao.java:80)     - 2.Query= SELECT               
+     res_num,         
+     res_passport,    
+     res_ename,       
+     res_bir,         
+     res_phone,       
+     res_email,       
+     res_gender,      
+     res_state,       
+     res_pay,         
+     res_mileage,     
+     res_scode,       
+     u_num            
+ FROM                 
+     reservation      
+WHERE res_num= ?		
+2020-03-15 13:06:37,788 DEBUG [main] Reservation.WorkDiv (  ResDao.java:84)     - 3.param=
+ResVO [resNum=202003070076003, resPassport=1, resEname=ear, resBir=1991-01-20, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=1, resMileage=1, resScode=20200227, uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 13:06:37,799 DEBUG [main] Reservation.WorkDiv (  ResDao.java:110)     - 4.outVO=
+null
+2020-03-15 13:06:37,800 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:89)     - ********************************
+2020-03-15 13:06:37,801 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:90)     - outVO=null
+2020-03-15 13:06:37,801 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:91)     - ********************************
+2020-03-15 13:25:41,521 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:38)     - 1.connection=oracle.jdbc.driver.T4CConnection@6a6824be
+2020-03-15 13:25:41,523 DEBUG [main] Reservation.WorkDiv (  ResDao.java:160)     - 2.SQL(Query) :
+ UPDATE reservation         
+  SET                        
+       res_num        = ? ,  
+       res_passport   = ? ,  
+       res_ename      = ? ,  
+       res_bir        = ? ,  
+       res_phone      = ? ,  
+       res_email      = ? ,  
+       res_gender     = ? ,  
+       res_state      = ? ,  
+       res_pay        = ? ,  
+       res_mileage    = ? ,  
+       res_scode      = ? ,  
+       u_num          = ?    
+                              
+  WHERE                      
+        res_num   = ?        
+ 
+2020-03-15 13:25:41,562 DEBUG [main] Reservation.WorkDiv (  ResDao.java:163)     - 2.1.PreparedStatement : oracle.jdbc.driver.OraclePreparedStatementWrapper@42dafa95
+2020-03-15 13:25:41,562 DEBUG [main] Reservation.WorkDiv (  ResDao.java:166)     - 3.param : 
+ResVO [resNum=202003070076003, resPassport=1, resEname=ear, resBir=1991-01-20, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=1, resMileage=1, resScode=20200227, uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 13:25:41,566 DEBUG [main] Reservation.WorkDiv (  ResDao.java:184)     - 4.flag : 0
+2020-03-15 13:25:41,568 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:72)     - Flag : 0
+2020-03-15 13:25:41,568 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:78)     - ===========================
+2020-03-15 13:25:41,568 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:79)     - 실패
+2020-03-15 13:25:41,568 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:80)     - ===========================
+2020-03-15 13:25:41,605 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:38)     - 1.connection=oracle.jdbc.driver.T4CConnection@59494225
+2020-03-15 13:25:41,605 DEBUG [main] Reservation.WorkDiv (  ResDao.java:76)     - 1.connection=oracle.jdbc.driver.T4CConnection@59494225
+2020-03-15 13:25:41,606 DEBUG [main] Reservation.WorkDiv (  ResDao.java:79)     - 2.Query= SELECT               
+     res_num,         
+     res_passport,    
+     res_ename,       
+     res_bir,         
+     res_phone,       
+     res_email,       
+     res_gender,      
+     res_state,       
+     res_pay,         
+     res_mileage,     
+     res_scode,       
+     u_num            
+ FROM                 
+     reservation      
+WHERE res_num= ?		
+2020-03-15 13:25:41,606 DEBUG [main] Reservation.WorkDiv (  ResDao.java:83)     - 3.param=
+ResVO [resNum=202003070076003, resPassport=1, resEname=ear, resBir=1991-01-20, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=1, resMileage=1, resScode=20200227, uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 13:25:41,633 DEBUG [main] Reservation.WorkDiv (  ResDao.java:109)     - 4.outVO=
+null
+2020-03-15 13:25:41,658 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:89)     - ********************************
+2020-03-15 13:25:41,659 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:90)     - outVO=null
+2020-03-15 13:25:41,659 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:91)     - ********************************
+2020-03-15 13:41:33,075 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:38)     - 1.connection=oracle.jdbc.driver.T4CConnection@6a6824be
+2020-03-15 13:41:33,076 DEBUG [main] Reservation.WorkDiv (  ResDao.java:159)     - 2.SQL(Query) :
+ UPDATE reservation         
+  SET                        
+       res_num        = ? ,  
+       res_passport   = ? ,  
+       res_ename      = ? ,  
+       res_bir        = ? ,  
+       res_phone      = ? ,  
+       res_email      = ? ,  
+       res_gender     = ? ,  
+       res_state      = ? ,  
+       res_pay        = ? ,  
+       res_mileage    = ? ,  
+       res_scode      = ? ,  
+       u_num          = ?    
+                              
+  WHERE                      
+        res_num   = ?        
+ 
+2020-03-15 13:41:33,115 DEBUG [main] Reservation.WorkDiv (  ResDao.java:162)     - 2.1.PreparedStatement : oracle.jdbc.driver.OraclePreparedStatementWrapper@42dafa95
+2020-03-15 13:41:33,115 DEBUG [main] Reservation.WorkDiv (  ResDao.java:165)     - 3.param : 
+ResVO [resNum=202003070076003, resPassport=1, resEname=ear, resBir=1991-01-20, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=1, resMileage=1, resScode=20200227, uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 13:41:33,119 DEBUG [main] Reservation.WorkDiv (  ResDao.java:183)     - 4.flag : 0
+2020-03-15 13:41:33,121 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:72)     - Flag : 0
+2020-03-15 13:41:33,121 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:78)     - ===========================
+2020-03-15 13:41:33,121 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:79)     - 실패
+2020-03-15 13:41:33,121 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:80)     - ===========================
+2020-03-15 13:41:33,146 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:38)     - 1.connection=oracle.jdbc.driver.T4CConnection@59494225
+2020-03-15 13:41:33,146 DEBUG [main] Reservation.WorkDiv (  ResDao.java:76)     - 1.connection=oracle.jdbc.driver.T4CConnection@59494225
+2020-03-15 13:41:33,146 DEBUG [main] Reservation.WorkDiv (  ResDao.java:79)     - 2.Query= SELECT               
+     res_num,         
+     res_passport,    
+     res_ename,       
+     res_bir,         
+     res_phone,       
+     res_email,       
+     res_gender,      
+     res_state,       
+     res_pay,         
+     res_mileage,     
+     res_scode,       
+     u_num            
+ FROM                 
+     reservation      
+WHERE res_num= ?		
+2020-03-15 13:41:33,146 DEBUG [main] Reservation.WorkDiv (  ResDao.java:83)     - 3.param=
+ResVO [resNum=202003070076003, resPassport=1, resEname=ear, resBir=1991-01-20, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=1, resMileage=1, resScode=20200227, uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 13:41:33,155 DEBUG [main] Reservation.WorkDiv (  ResDao.java:108)     - 4.outVO=
+null
+2020-03-15 13:41:33,156 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:89)     - ********************************
+2020-03-15 13:41:33,156 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:90)     - outVO=null
+2020-03-15 13:41:33,157 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:91)     - ********************************
+2020-03-15 13:41:54,748 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:38)     - 1.connection=oracle.jdbc.driver.T4CConnection@4206a205
+2020-03-15 13:42:14,953 DEBUG [main] Reservation.WorkDiv (  ResDao.java:159)     - 2.SQL(Query) :
+ UPDATE reservation         
+  SET                        
+       res_num        = ? ,  
+       res_passport   = ? ,  
+       res_ename      = ? ,  
+       res_bir        = ? ,  
+       res_phone      = ? ,  
+       res_email      = ? ,  
+       res_gender     = ? ,  
+       res_state      = ? ,  
+       res_pay        = ? ,  
+       res_mileage    = ? ,  
+       res_scode      = ? ,  
+       u_num          = ?    
+                              
+  WHERE                      
+        res_num   = ?        
+ 
+2020-03-15 13:42:24,975 DEBUG [main] Reservation.WorkDiv (  ResDao.java:162)     - 2.1.PreparedStatement : oracle.jdbc.driver.OraclePreparedStatementWrapper@75db5df9
+2020-03-15 13:42:43,553 DEBUG [main] Reservation.WorkDiv (  ResDao.java:165)     - 3.param : 
+ResVO [resNum=202003070076003, resPassport=1, resEname=ear, resBir=1991-01-20, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=1, resMileage=1, resScode=20200227, uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 13:43:35,845 DEBUG [main] Reservation.WorkDiv (  ResDao.java:183)     - 4.flag : 0
+2020-03-15 13:44:55,012 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:72)     - Flag : 0
+2020-03-15 13:44:55,012 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:78)     - ===========================
+2020-03-15 13:44:55,012 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:79)     - 실패
+2020-03-15 13:44:55,012 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:80)     - ===========================
+2020-03-15 13:44:55,037 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:38)     - 1.connection=oracle.jdbc.driver.T4CConnection@37883b97
+2020-03-15 13:44:55,037 DEBUG [main] Reservation.WorkDiv (  ResDao.java:76)     - 1.connection=oracle.jdbc.driver.T4CConnection@37883b97
+2020-03-15 13:44:55,037 DEBUG [main] Reservation.WorkDiv (  ResDao.java:79)     - 2.Query= SELECT               
+     res_num,         
+     res_passport,    
+     res_ename,       
+     res_bir,         
+     res_phone,       
+     res_email,       
+     res_gender,      
+     res_state,       
+     res_pay,         
+     res_mileage,     
+     res_scode,       
+     u_num            
+ FROM                 
+     reservation      
+WHERE res_num= ?		
+2020-03-15 13:44:55,037 DEBUG [main] Reservation.WorkDiv (  ResDao.java:83)     - 3.param=
+ResVO [resNum=202003070076003, resPassport=1, resEname=ear, resBir=1991-01-20, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=1, resMileage=1, resScode=20200227, uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 13:44:55,048 DEBUG [main] Reservation.WorkDiv (  ResDao.java:108)     - 4.outVO=
+null
+2020-03-15 13:44:55,049 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:89)     - ********************************
+2020-03-15 13:44:55,050 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:90)     - outVO=null
+2020-03-15 13:44:55,050 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:91)     - ********************************
+2020-03-15 13:45:10,997 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:38)     - 1.connection=oracle.jdbc.driver.T4CConnection@6a6824be
+2020-03-15 13:45:10,998 DEBUG [main] Reservation.WorkDiv (  ResDao.java:159)     - 2.SQL(Query) :
+ UPDATE reservation         
+  SET                        
+       res_num        = ? ,  
+       res_passport   = ? ,  
+       res_ename      = ? ,  
+       res_bir        = ? ,  
+       res_phone      = ? ,  
+       res_email      = ? ,  
+       res_gender     = ? ,  
+       res_state      = ? ,  
+       res_pay        = ? ,  
+       res_mileage    = ? ,  
+       res_scode      = ? ,  
+       u_num          = ?    
+                              
+  WHERE                      
+        res_num   = ?        
+ 
+2020-03-15 13:45:11,039 DEBUG [main] Reservation.WorkDiv (  ResDao.java:162)     - 2.1.PreparedStatement : oracle.jdbc.driver.OraclePreparedStatementWrapper@42dafa95
+2020-03-15 13:45:11,039 DEBUG [main] Reservation.WorkDiv (  ResDao.java:165)     - 3.param : 
+ResVO [resNum=202003070076003, resPassport=1, resEname=ear, resBir=1991-01-20, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=1, resMileage=1, resScode=20200227, uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 13:45:11,042 DEBUG [main] Reservation.WorkDiv (  ResDao.java:183)     - 4.flag : 0
+2020-03-15 13:45:11,045 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:72)     - Flag : 0
+2020-03-15 13:45:11,045 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:78)     - ===========================
+2020-03-15 13:45:11,045 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:79)     - 실패
+2020-03-15 13:45:11,046 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:80)     - ===========================
+2020-03-15 13:45:11,767 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:38)     - 1.connection=oracle.jdbc.driver.T4CConnection@59494225
+2020-03-15 13:45:11,767 DEBUG [main] Reservation.WorkDiv (  ResDao.java:76)     - 1.connection=oracle.jdbc.driver.T4CConnection@59494225
+2020-03-15 13:45:11,767 DEBUG [main] Reservation.WorkDiv (  ResDao.java:79)     - 2.Query= SELECT               
+     res_num,         
+     res_passport,    
+     res_ename,       
+     res_bir,         
+     res_phone,       
+     res_email,       
+     res_gender,      
+     res_state,       
+     res_pay,         
+     res_mileage,     
+     res_scode,       
+     u_num            
+ FROM                 
+     reservation      
+WHERE res_num= ?		
+2020-03-15 13:45:11,767 DEBUG [main] Reservation.WorkDiv (  ResDao.java:83)     - 3.param=
+ResVO [resNum=202003070076003, resPassport=1, resEname=ear, resBir=1991-01-20, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=1, resMileage=1, resScode=20200227, uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 13:45:11,776 DEBUG [main] Reservation.WorkDiv (  ResDao.java:108)     - 4.outVO=
+null
+2020-03-15 13:45:11,778 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:89)     - ********************************
+2020-03-15 13:45:11,778 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:90)     - outVO=null
+2020-03-15 13:45:11,779 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:91)     - ********************************
+2020-03-15 13:45:27,013 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:38)     - 1.connection=oracle.jdbc.driver.T4CConnection@6a6824be
+2020-03-15 13:45:27,015 DEBUG [main] Reservation.WorkDiv (  ResDao.java:159)     - 2.SQL(Query) :
+ UPDATE reservation         
+  SET                        
+       res_num        = ? ,  
+       res_passport   = ? ,  
+       res_ename      = ? ,  
+       res_bir        = ? ,  
+       res_phone      = ? ,  
+       res_email      = ? ,  
+       res_gender     = ? ,  
+       res_state      = ? ,  
+       res_pay        = ? ,  
+       res_mileage    = ? ,  
+       res_scode      = ? ,  
+       u_num          = ?    
+                              
+  WHERE                      
+        res_num   = ?        
+ 
+2020-03-15 13:45:27,054 DEBUG [main] Reservation.WorkDiv (  ResDao.java:162)     - 2.1.PreparedStatement : oracle.jdbc.driver.OraclePreparedStatementWrapper@42dafa95
+2020-03-15 13:45:27,054 DEBUG [main] Reservation.WorkDiv (  ResDao.java:165)     - 3.param : 
+ResVO [resNum=202003070076003, resPassport=1, resEname=ear, resBir=1991-01-20, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=1, resMileage=1, resScode=20200227, uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 13:45:27,058 DEBUG [main] Reservation.WorkDiv (  ResDao.java:183)     - 4.flag : 0
+2020-03-15 13:45:27,060 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:72)     - Flag : 0
+2020-03-15 13:45:27,060 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:78)     - ===========================
+2020-03-15 13:45:27,060 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:79)     - 실패
+2020-03-15 13:45:27,060 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:80)     - ===========================
+2020-03-15 13:45:27,080 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:38)     - 1.connection=oracle.jdbc.driver.T4CConnection@59494225
+2020-03-15 13:45:27,080 DEBUG [main] Reservation.WorkDiv (  ResDao.java:76)     - 1.connection=oracle.jdbc.driver.T4CConnection@59494225
+2020-03-15 13:45:27,080 DEBUG [main] Reservation.WorkDiv (  ResDao.java:79)     - 2.Query= SELECT               
+     res_num,         
+     res_passport,    
+     res_ename,       
+     res_bir,         
+     res_phone,       
+     res_email,       
+     res_gender,      
+     res_state,       
+     res_pay,         
+     res_mileage,     
+     res_scode,       
+     u_num            
+ FROM                 
+     reservation      
+WHERE res_num= ?		
+2020-03-15 13:45:27,080 DEBUG [main] Reservation.WorkDiv (  ResDao.java:83)     - 3.param=
+ResVO [resNum=202003070076003, resPassport=1, resEname=ear, resBir=1991-01-20, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=1, resMileage=1, resScode=20200227, uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 13:45:27,089 DEBUG [main] Reservation.WorkDiv (  ResDao.java:108)     - 4.outVO=
+null
+2020-03-15 13:45:27,090 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:89)     - ********************************
+2020-03-15 13:45:27,090 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:90)     - outVO=null
+2020-03-15 13:45:27,091 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:91)     - ********************************
+2020-03-15 13:46:36,514 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:38)     - 1.connection=oracle.jdbc.driver.T4CConnection@6a6824be
+2020-03-15 13:46:36,515 DEBUG [main] Reservation.WorkDiv (  ResDao.java:159)     - 2.SQL(Query) :
+ UPDATE reservation         
+  SET                        
+       res_num        = ? ,  
+       res_passport   = ? ,  
+       res_ename      = ? ,  
+       res_bir        = ? ,  
+       res_phone      = ? ,  
+       res_email      = ? ,  
+       res_gender     = ? ,  
+       res_state      = ? ,  
+       res_pay        = ? ,  
+       res_mileage    = ? ,  
+       res_scode      = ? ,  
+       u_num          = ?    
+                              
+  WHERE                      
+        res_num   = ?        
+ 
+2020-03-15 13:46:36,555 DEBUG [main] Reservation.WorkDiv (  ResDao.java:162)     - 2.1.PreparedStatement : oracle.jdbc.driver.OraclePreparedStatementWrapper@42dafa95
+2020-03-15 13:46:36,555 DEBUG [main] Reservation.WorkDiv (  ResDao.java:165)     - 3.param : 
+ResVO [resNum=202003070076003, resPassport=1, resEname=ear, resBir=1991-01-20, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=1, resMileage=1, resScode=20200227, uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 13:46:36,559 DEBUG [main] Reservation.WorkDiv (  ResDao.java:183)     - 4.flag : 0
+2020-03-15 13:46:36,561 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:72)     - Flag : 0
+2020-03-15 13:46:36,561 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:78)     - ===========================
+2020-03-15 13:46:36,561 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:79)     - 실패
+2020-03-15 13:46:36,561 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:80)     - ===========================
+2020-03-15 13:46:36,609 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:38)     - 1.connection=oracle.jdbc.driver.T4CConnection@59494225
+2020-03-15 13:46:36,609 DEBUG [main] Reservation.WorkDiv (  ResDao.java:76)     - 1.connection=oracle.jdbc.driver.T4CConnection@59494225
+2020-03-15 13:46:36,610 DEBUG [main] Reservation.WorkDiv (  ResDao.java:79)     - 2.Query= SELECT               
+     res_num,         
+     res_passport,    
+     res_ename,       
+     res_bir,         
+     res_phone,       
+     res_email,       
+     res_gender,      
+     res_state,       
+     res_pay,         
+     res_mileage,     
+     res_scode,       
+     u_num            
+ FROM                 
+     reservation      
+WHERE res_num= ?		
+2020-03-15 13:46:36,610 DEBUG [main] Reservation.WorkDiv (  ResDao.java:83)     - 3.param=
+ResVO [resNum=202003070076003, resPassport=1, resEname=ear, resBir=1991-01-20, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=1, resMileage=1, resScode=20200227, uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 13:46:36,634 DEBUG [main] Reservation.WorkDiv (  ResDao.java:108)     - 4.outVO=
+null
+2020-03-15 13:46:36,635 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:89)     - ********************************
+2020-03-15 13:46:36,635 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:90)     - outVO=null
+2020-03-15 13:46:36,637 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:91)     - ********************************
+2020-03-15 13:48:18,874 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:38)     - 1.connection=oracle.jdbc.driver.T4CConnection@6a6824be
+2020-03-15 13:48:18,875 DEBUG [main] Reservation.WorkDiv (  ResDao.java:158)     - 2.SQL(Query) :
+ UPDATE reservation         
+  SET                        
+       res_num        = ? ,  
+       res_passport   = ? ,  
+       res_ename      = ? ,  
+       res_bir        = ? ,  
+       res_phone      = ? ,  
+       res_email      = ? ,  
+       res_gender     = ? ,  
+       res_state      = ? ,  
+       res_pay        = ? ,  
+       res_mileage    = ? ,  
+       res_scode      = ? ,  
+       u_num          = ?    
+   WHERE                      
+        res_num   = ?        
+ 
+2020-03-15 13:48:18,914 DEBUG [main] Reservation.WorkDiv (  ResDao.java:161)     - 2.1.PreparedStatement : oracle.jdbc.driver.OraclePreparedStatementWrapper@42dafa95
+2020-03-15 13:48:18,914 DEBUG [main] Reservation.WorkDiv (  ResDao.java:164)     - 3.param : 
+ResVO [resNum=202003070076003, resPassport=1, resEname=ear, resBir=1991-01-20, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=1, resMileage=1, resScode=20200227, uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 13:48:18,918 DEBUG [main] Reservation.WorkDiv (  ResDao.java:182)     - 4.flag : 0
+2020-03-15 13:48:18,920 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:72)     - Flag : 0
+2020-03-15 13:48:18,920 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:78)     - ===========================
+2020-03-15 13:48:18,920 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:79)     - 실패
+2020-03-15 13:48:18,920 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:80)     - ===========================
+2020-03-15 13:48:18,956 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:38)     - 1.connection=oracle.jdbc.driver.T4CConnection@59494225
+2020-03-15 13:48:18,956 DEBUG [main] Reservation.WorkDiv (  ResDao.java:76)     - 1.connection=oracle.jdbc.driver.T4CConnection@59494225
+2020-03-15 13:48:18,956 DEBUG [main] Reservation.WorkDiv (  ResDao.java:79)     - 2.Query= SELECT               
+     res_num,         
+     res_passport,    
+     res_ename,       
+     res_bir,         
+     res_phone,       
+     res_email,       
+     res_gender,      
+     res_state,       
+     res_pay,         
+     res_mileage,     
+     res_scode,       
+     u_num            
+ FROM                 
+     reservation      
+WHERE res_num= ?		
+2020-03-15 13:48:18,956 DEBUG [main] Reservation.WorkDiv (  ResDao.java:83)     - 3.param=
+ResVO [resNum=202003070076003, resPassport=1, resEname=ear, resBir=1991-01-20, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=1, resMileage=1, resScode=20200227, uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 13:48:18,965 DEBUG [main] Reservation.WorkDiv (  ResDao.java:108)     - 4.outVO=
+null
+2020-03-15 13:48:18,997 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:89)     - ********************************
+2020-03-15 13:48:18,998 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:90)     - outVO=null
+2020-03-15 13:48:18,998 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:91)     - ********************************
+2020-03-15 13:52:35,712 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:38)     - 1.connection=oracle.jdbc.driver.T4CConnection@6a6824be
+2020-03-15 13:52:35,713 DEBUG [main] Reservation.WorkDiv (  ResDao.java:158)     - 2.SQL(Query) :
+ UPDATE reservation         
+  SET                        
+       res_num        = ? ,  
+       res_passport   = ? ,  
+       res_ename      = ? ,  
+       res_bir        = ? ,  
+       res_phone      = ? ,  
+       res_email      = ? ,  
+       res_gender     = ? ,  
+       res_state      = ? ,  
+       res_pay        = ? ,  
+       res_mileage    = ? ,  
+       res_scode      = ? ,  
+       u_num          = ?    
+   WHERE                      
+        res_num   = ?    ;    
+ 
+2020-03-15 13:52:35,754 DEBUG [main] Reservation.WorkDiv (  ResDao.java:161)     - 2.1.PreparedStatement : oracle.jdbc.driver.OraclePreparedStatementWrapper@42dafa95
+2020-03-15 13:52:35,754 DEBUG [main] Reservation.WorkDiv (  ResDao.java:164)     - 3.param : 
+ResVO [resNum=202003070076003, resPassport=1, resEname=ear, resBir=1991-01-20, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=1, resMileage=1, resScode=20200227, uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 13:52:35,758 DEBUG [main] Reservation.WorkDiv (  ResDao.java:185)     - ===========================
+2020-03-15 13:52:35,758 DEBUG [main] Reservation.WorkDiv (  ResDao.java:186)     - =======SQLException=======ORA-00911: 문자가 부적합합니다
+
+2020-03-15 13:52:35,758 DEBUG [main] Reservation.WorkDiv (  ResDao.java:187)     - ===========================
+2020-03-15 13:52:35,760 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:72)     - Flag : 0
+2020-03-15 13:52:35,760 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:78)     - ===========================
+2020-03-15 13:52:35,760 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:79)     - 실패
+2020-03-15 13:52:35,760 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:80)     - ===========================
+2020-03-15 13:52:35,964 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:38)     - 1.connection=oracle.jdbc.driver.T4CConnection@5cb9f472
+2020-03-15 13:52:35,965 DEBUG [main] Reservation.WorkDiv (  ResDao.java:76)     - 1.connection=oracle.jdbc.driver.T4CConnection@5cb9f472
+2020-03-15 13:52:35,965 DEBUG [main] Reservation.WorkDiv (  ResDao.java:79)     - 2.Query= SELECT               
+     res_num,         
+     res_passport,    
+     res_ename,       
+     res_bir,         
+     res_phone,       
+     res_email,       
+     res_gender,      
+     res_state,       
+     res_pay,         
+     res_mileage,     
+     res_scode,       
+     u_num            
+ FROM                 
+     reservation      
+WHERE res_num= ?		
+2020-03-15 13:52:35,966 DEBUG [main] Reservation.WorkDiv (  ResDao.java:83)     - 3.param=
+ResVO [resNum=202003070076003, resPassport=1, resEname=ear, resBir=1991-01-20, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=1, resMileage=1, resScode=20200227, uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 13:52:35,976 DEBUG [main] Reservation.WorkDiv (  ResDao.java:108)     - 4.outVO=
+null
+2020-03-15 13:52:36,000 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:89)     - ********************************
+2020-03-15 13:52:36,001 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:90)     - outVO=null
+2020-03-15 13:52:36,001 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:91)     - ********************************
+2020-03-15 13:57:18,523 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:38)     - 1.connection=oracle.jdbc.driver.T4CConnection@6a6824be
+2020-03-15 13:57:18,525 DEBUG [main] Reservation.WorkDiv (  ResDao.java:158)     - 2.SQL(Query) :
+ UPDATE reservation            
+ SET                           
+      res_num = ?              
+      ,res_passport =   ?     
+      ,res_ename =      ?     
+      ,res_bir =        ?     
+      ,res_phone =      ?     
+      ,res_email =      ?     
+      ,res_gender =     ?     
+      ,res_state =      ?     
+      ,res_pay =        ?     
+      ,res_mileage =    ?     
+      ,res_scode =      ?     
+      ,u_num =          ?     
+ WHERE                            
+     res_num = ?                  
+
+2020-03-15 13:57:18,565 DEBUG [main] Reservation.WorkDiv (  ResDao.java:161)     - 2.1.PreparedStatement : oracle.jdbc.driver.OraclePreparedStatementWrapper@42dafa95
+2020-03-15 13:57:18,565 DEBUG [main] Reservation.WorkDiv (  ResDao.java:164)     - 3.param : 
+ResVO [resNum=202003070076003, resPassport=1, resEname=ear, resBir=1991-01-20, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=1, resMileage=1, resScode=20200227, uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 13:57:18,569 DEBUG [main] Reservation.WorkDiv (  ResDao.java:182)     - 4.flag : 0
+2020-03-15 13:57:18,571 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:72)     - Flag : 0
+2020-03-15 13:57:18,571 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:78)     - ===========================
+2020-03-15 13:57:18,571 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:79)     - 실패
+2020-03-15 13:57:18,571 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:80)     - ===========================
+2020-03-15 13:57:18,596 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:38)     - 1.connection=oracle.jdbc.driver.T4CConnection@59494225
+2020-03-15 13:57:18,596 DEBUG [main] Reservation.WorkDiv (  ResDao.java:76)     - 1.connection=oracle.jdbc.driver.T4CConnection@59494225
+2020-03-15 13:57:18,596 DEBUG [main] Reservation.WorkDiv (  ResDao.java:79)     - 2.Query= SELECT               
+     res_num,         
+     res_passport,    
+     res_ename,       
+     res_bir,         
+     res_phone,       
+     res_email,       
+     res_gender,      
+     res_state,       
+     res_pay,         
+     res_mileage,     
+     res_scode,       
+     u_num            
+ FROM                 
+     reservation      
+WHERE res_num= ?		
+2020-03-15 13:57:18,596 DEBUG [main] Reservation.WorkDiv (  ResDao.java:83)     - 3.param=
+ResVO [resNum=202003070076003, resPassport=1, resEname=ear, resBir=1991-01-20, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=1, resMileage=1, resScode=20200227, uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 13:57:18,605 DEBUG [main] Reservation.WorkDiv (  ResDao.java:108)     - 4.outVO=
+null
+2020-03-15 13:57:18,606 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:89)     - ********************************
+2020-03-15 13:57:18,606 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:90)     - outVO=null
+2020-03-15 13:57:18,607 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:91)     - ********************************
+2020-03-15 14:08:50,223 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:38)     - 1.connection=oracle.jdbc.driver.T4CConnection@4206a205
+2020-03-15 14:08:50,225 DEBUG [main] Reservation.WorkDiv (  ResDao.java:158)     - 2.SQL(Query) :
+ UPDATE reservation            
+ SET                           
+      res_num = ?              
+      ,res_passport =   ?     
+      ,res_ename =      ?     
+      ,res_bir =        ?     
+      ,res_phone =      ?     
+      ,res_email =      ?     
+      ,res_gender =     ?     
+      ,res_state =      ?     
+      ,res_pay =        ?     
+      ,res_mileage =    ?     
+      ,res_scode =      ?     
+      ,u_num =          ?     
+ WHERE                            
+     res_num = ?                  
+
+2020-03-15 14:08:50,287 DEBUG [main] Reservation.WorkDiv (  ResDao.java:161)     - 2.1.PreparedStatement : oracle.jdbc.driver.OraclePreparedStatementWrapper@75db5df9
+2020-03-15 14:08:50,288 DEBUG [main] Reservation.WorkDiv (  ResDao.java:164)     - 3.param : 
+ResVO [resNum=202003070076003, resPassport=1, resEname=ear, resBir=1991-01-20, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=1, resMileage=1, resScode=20200227, uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 14:09:13,780 DEBUG [main] Reservation.WorkDiv (  ResDao.java:182)     - 4.flag : 0
+2020-03-15 14:10:21,915 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:38)     - 1.connection=oracle.jdbc.driver.T4CConnection@3af9c5b7
+2020-03-15 14:10:21,915 DEBUG [main] Reservation.WorkDiv (  ResDao.java:158)     - 2.SQL(Query) :
+ UPDATE reservation            
+ SET                           
+      res_num = ?              
+      ,res_passport =   ?     
+      ,res_ename =      ?     
+      ,res_bir =        ?     
+      ,res_phone =      ?     
+      ,res_email =      ?     
+      ,res_gender =     ?     
+      ,res_state =      ?     
+      ,res_pay =        ?     
+      ,res_mileage =    ?     
+      ,res_scode =      ?     
+      ,u_num =          ?     
+ WHERE                            
+     res_num = ?                  
+
+2020-03-15 14:10:21,915 DEBUG [main] Reservation.WorkDiv (  ResDao.java:161)     - 2.1.PreparedStatement : oracle.jdbc.driver.OraclePreparedStatementWrapper@37271612
+2020-03-15 14:10:21,915 DEBUG [main] Reservation.WorkDiv (  ResDao.java:164)     - 3.param : 
+ResVO [resNum=202003070076003, resPassport=1, resEname=ear, resBir=1991-01-20, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=1, resMileage=1, resScode=20200227, uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 14:10:33,313 DEBUG [main] Reservation.WorkDiv (  ResDao.java:182)     - 4.flag : 0
+2020-03-15 14:10:49,120 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:72)     - Flag : 0
+2020-03-15 14:10:49,121 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:78)     - ===========================
+2020-03-15 14:10:49,121 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:79)     - 실패
+2020-03-15 14:10:49,121 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:80)     - ===========================
+2020-03-15 14:10:49,138 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:38)     - 1.connection=oracle.jdbc.driver.T4CConnection@6ab778a
+2020-03-15 14:10:49,138 DEBUG [main] Reservation.WorkDiv (  ResDao.java:76)     - 1.connection=oracle.jdbc.driver.T4CConnection@6ab778a
+2020-03-15 14:10:49,139 DEBUG [main] Reservation.WorkDiv (  ResDao.java:79)     - 2.Query= SELECT               
+     res_num,         
+     res_passport,    
+     res_ename,       
+     res_bir,         
+     res_phone,       
+     res_email,       
+     res_gender,      
+     res_state,       
+     res_pay,         
+     res_mileage,     
+     res_scode,       
+     u_num            
+ FROM                 
+     reservation      
+WHERE res_num= ?		
+2020-03-15 14:10:49,139 DEBUG [main] Reservation.WorkDiv (  ResDao.java:83)     - 3.param=
+ResVO [resNum=202003070076003, resPassport=1, resEname=ear, resBir=1991-01-20, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=1, resMileage=1, resScode=20200227, uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 14:10:49,151 DEBUG [main] Reservation.WorkDiv (  ResDao.java:108)     - 4.outVO=
+null
+2020-03-15 14:10:49,152 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:89)     - ********************************
+2020-03-15 14:10:49,152 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:90)     - outVO=null
+2020-03-15 14:10:49,153 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:91)     - ********************************
+2020-03-15 14:17:21,395 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:38)     - 1.connection=oracle.jdbc.driver.T4CConnection@68f7aae2
+2020-03-15 14:17:21,396 DEBUG [main] Reservation.WorkDiv (  ResDao.java:158)     - 2.SQL(Query) :
+ UPDATE reservation            
+ SET                           
+      res_num = ?              
+      ,res_passport =   ?     
+      ,res_ename =      ?     
+      ,res_bir =        ?     
+      ,res_phone =      ?     
+      ,res_email =      ?     
+      ,res_gender =     ?     
+      ,res_state =      ?     
+      ,res_pay =        ?     
+      ,res_mileage =    ?     
+      ,res_scode =      ?     
+      ,u_num =          ?     
+ WHERE                            
+     res_num = ?                  
+
+2020-03-15 14:17:21,433 DEBUG [main] Reservation.WorkDiv (  ResDao.java:161)     - 2.1.PreparedStatement : oracle.jdbc.driver.OraclePreparedStatementWrapper@21213b92
+2020-03-15 14:17:21,434 DEBUG [main] Reservation.WorkDiv (  ResDao.java:164)     - 3.param : 
+ResVO [resNum=202003070076003, resPassport=1, resEname=ear, resBir=1991-01-20, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=1, resMileage=1, resScode=20200227, uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 14:17:21,437 DEBUG [main] Reservation.WorkDiv (  ResDao.java:182)     - 4.flag : 0
+2020-03-15 14:17:21,439 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:72)     - Flag : 0
+2020-03-15 14:17:21,439 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:78)     - ===========================
+2020-03-15 14:17:21,439 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:79)     - 실패
+2020-03-15 14:17:21,439 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:80)     - ===========================
+2020-03-15 14:17:21,471 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:38)     - 1.connection=oracle.jdbc.driver.T4CConnection@3108bc
+2020-03-15 14:17:21,472 DEBUG [main] Reservation.WorkDiv (  ResDao.java:76)     - 1.connection=oracle.jdbc.driver.T4CConnection@3108bc
+2020-03-15 14:17:21,472 DEBUG [main] Reservation.WorkDiv (  ResDao.java:79)     - 2.Query= SELECT               
+     res_num,         
+     res_passport,    
+     res_ename,       
+     res_bir,         
+     res_phone,       
+     res_email,       
+     res_gender,      
+     res_state,       
+     res_pay,         
+     res_mileage,     
+     res_scode,       
+     u_num            
+ FROM                 
+     reservation      
+WHERE res_num= ?		
+2020-03-15 14:17:21,472 DEBUG [main] Reservation.WorkDiv (  ResDao.java:83)     - 3.param=
+ResVO [resNum=202003070076003, resPassport=1, resEname=ear, resBir=1991-01-20, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=1, resMileage=1, resScode=20200227, uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 14:17:21,495 DEBUG [main] Reservation.WorkDiv (  ResDao.java:108)     - 4.outVO=
+null
+2020-03-15 14:17:21,496 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:89)     - ********************************
+2020-03-15 14:17:21,497 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:90)     - outVO=null
+2020-03-15 14:17:21,497 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:91)     - ********************************
+2020-03-15 14:40:48,702 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:38)     - 1.connection=oracle.jdbc.driver.T4CConnection@68f7aae2
+2020-03-15 14:40:48,703 DEBUG [main] Reservation.WorkDiv (  ResDao.java:157)     - 2.SQL(Query) :
+ UPDATE reservation            
+ SET                           
+      res_num = ?              
+      ,res_passport =   ?     
+      ,res_ename =      ?     
+      ,res_bir =        ?     
+      ,res_phone =      ?     
+      ,res_email =      ?     
+      ,res_gender =     ?     
+      ,res_state =      ?     
+      ,res_pay =        ?     
+      ,res_mileage =    ?     
+      ,res_scode =      ?     
+      ,u_num =          ?     
+ WHERE   res_num = ?      
+
+2020-03-15 14:40:48,743 DEBUG [main] Reservation.WorkDiv (  ResDao.java:160)     - 2.1.PreparedStatement : oracle.jdbc.driver.OraclePreparedStatementWrapper@21213b92
+2020-03-15 14:40:48,743 DEBUG [main] Reservation.WorkDiv (  ResDao.java:163)     - 3.param : 
+ResVO [resNum=202003070076003, resPassport=1, resEname=ear, resBir=1991-01-20, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=1, resMileage=1, resScode=20200227, uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 14:40:48,747 DEBUG [main] Reservation.WorkDiv (  ResDao.java:181)     - 4.flag : 0
+2020-03-15 14:40:48,749 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:72)     - Flag : 0
+2020-03-15 14:40:48,749 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:78)     - ===========================
+2020-03-15 14:40:48,749 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:79)     - 실패
+2020-03-15 14:40:48,750 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:80)     - ===========================
+2020-03-15 14:40:48,785 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:38)     - 1.connection=oracle.jdbc.driver.T4CConnection@3108bc
+2020-03-15 14:40:48,785 DEBUG [main] Reservation.WorkDiv (  ResDao.java:76)     - 1.connection=oracle.jdbc.driver.T4CConnection@3108bc
+2020-03-15 14:40:48,785 DEBUG [main] Reservation.WorkDiv (  ResDao.java:79)     - 2.Query= SELECT               
+     res_num,         
+     res_passport,    
+     res_ename,       
+     res_bir,         
+     res_phone,       
+     res_email,       
+     res_gender,      
+     res_state,       
+     res_pay,         
+     res_mileage,     
+     res_scode,       
+     u_num            
+ FROM                 
+     reservation      
+WHERE res_num= ?		
+2020-03-15 14:40:48,785 DEBUG [main] Reservation.WorkDiv (  ResDao.java:83)     - 3.param=
+ResVO [resNum=202003070076003, resPassport=1, resEname=ear, resBir=1991-01-20, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=1, resMileage=1, resScode=20200227, uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 14:40:48,794 DEBUG [main] Reservation.WorkDiv (  ResDao.java:108)     - 4.outVO=
+null
+2020-03-15 14:40:48,794 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:89)     - ********************************
+2020-03-15 14:40:48,794 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:90)     - outVO=null
+2020-03-15 14:40:48,795 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:91)     - ********************************
+2020-03-15 14:41:57,389 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:38)     - 1.connection=oracle.jdbc.driver.T4CConnection@68f7aae2
+2020-03-15 14:41:57,391 DEBUG [main] Reservation.WorkDiv (  ResDao.java:157)     - 2.SQL(Query) :
+ UPDATE reservation            
+ SET                           
+      res_num = ?              
+      ,res_passport =   ?     
+      ,res_ename =      ?     
+      ,res_bir =        ?     
+      ,res_phone =      ?     
+      ,res_email =      ?     
+      ,res_gender =     ?     
+      ,res_state =      ?     
+      ,res_pay =        ?     
+      ,res_mileage =    ?     
+      ,res_scode =      ?     
+      ,u_num =          ?     
+ WHERE   res_num = ?      
+
+2020-03-15 14:41:57,428 DEBUG [main] Reservation.WorkDiv (  ResDao.java:160)     - 2.1.PreparedStatement : oracle.jdbc.driver.OraclePreparedStatementWrapper@21213b92
+2020-03-15 14:41:57,428 DEBUG [main] Reservation.WorkDiv (  ResDao.java:163)     - 3.param : 
+ResVO [resNum=202003070076003, resPassport=1, resEname=ear, resBir=1991-01-20, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=1, resMileage=1, resScode=20200227, uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 14:41:57,432 DEBUG [main] Reservation.WorkDiv (  ResDao.java:181)     - 4.flag : 0
+2020-03-15 14:41:57,434 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:72)     - Flag : 0
+2020-03-15 14:41:57,434 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:78)     - ===========================
+2020-03-15 14:41:57,434 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:79)     - 실패
+2020-03-15 14:41:57,434 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:80)     - ===========================
+2020-03-15 14:41:57,469 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:38)     - 1.connection=oracle.jdbc.driver.T4CConnection@3108bc
+2020-03-15 14:41:57,469 DEBUG [main] Reservation.WorkDiv (  ResDao.java:76)     - 1.connection=oracle.jdbc.driver.T4CConnection@3108bc
+2020-03-15 14:41:57,469 DEBUG [main] Reservation.WorkDiv (  ResDao.java:79)     - 2.Query= SELECT               
+     res_num,         
+     res_passport,    
+     res_ename,       
+     res_bir,         
+     res_phone,       
+     res_email,       
+     res_gender,      
+     res_state,       
+     res_pay,         
+     res_mileage,     
+     res_scode,       
+     u_num            
+ FROM                 
+     reservation      
+WHERE res_num= ?		
+2020-03-15 14:41:57,470 DEBUG [main] Reservation.WorkDiv (  ResDao.java:83)     - 3.param=
+ResVO [resNum=202003070076003, resPassport=1, resEname=ear, resBir=1991-01-20, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=1, resMileage=1, resScode=20200227, uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 14:41:57,478 DEBUG [main] Reservation.WorkDiv (  ResDao.java:108)     - 4.outVO=
+null
+2020-03-15 14:41:57,479 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:89)     - ********************************
+2020-03-15 14:41:57,479 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:90)     - outVO=null
+2020-03-15 14:41:57,480 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:91)     - ********************************
+2020-03-15 14:44:44,413 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:38)     - 1.connection=oracle.jdbc.driver.T4CConnection@68f7aae2
+2020-03-15 14:44:44,415 DEBUG [main] Reservation.WorkDiv (  ResDao.java:157)     - 2.SQL(Query) :
+ UPDATE reservation            
+ SET                           
+      res_num = ?              
+      ,res_passport =   ?     
+      ,res_ename =      ?     
+      ,res_bir =        ?     
+      ,res_phone =      ?     
+      ,res_email =      ?     
+      ,res_gender =     ?     
+      ,res_state =      ?     
+      ,res_pay =        ?     
+      ,res_mileage =    ?     
+      ,res_scode =      ?     
+      ,u_num =          ?     
+ WHERE   res_num = ?      
+
+2020-03-15 14:44:44,454 DEBUG [main] Reservation.WorkDiv (  ResDao.java:160)     - 2.1.PreparedStatement : oracle.jdbc.driver.OraclePreparedStatementWrapper@21213b92
+2020-03-15 14:44:44,454 DEBUG [main] Reservation.WorkDiv (  ResDao.java:163)     - 3.param : 
+ResVO [resNum=202003070076003, resPassport=1, resEname=ear, resBir=1991-01-20, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=1, resMileage=1, resScode=20200227, uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 14:44:44,458 DEBUG [main] Reservation.WorkDiv (  ResDao.java:181)     - 4.flag : 0
+2020-03-15 14:44:44,460 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:72)     - Flag : 0
+2020-03-15 14:44:44,460 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:78)     - ===========================
+2020-03-15 14:44:44,460 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:79)     - 실패
+2020-03-15 14:44:44,460 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:80)     - ===========================
+2020-03-15 14:44:45,040 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:38)     - 1.connection=oracle.jdbc.driver.T4CConnection@3108bc
+2020-03-15 14:44:45,041 DEBUG [main] Reservation.WorkDiv (  ResDao.java:76)     - 1.connection=oracle.jdbc.driver.T4CConnection@3108bc
+2020-03-15 14:44:45,041 DEBUG [main] Reservation.WorkDiv (  ResDao.java:79)     - 2.Query= SELECT               
+     res_num,         
+     res_passport,    
+     res_ename,       
+     res_bir,         
+     res_phone,       
+     res_email,       
+     res_gender,      
+     res_state,       
+     res_pay,         
+     res_mileage,     
+     res_scode,       
+     u_num            
+ FROM                 
+     reservation      
+WHERE res_num= ?		
+2020-03-15 14:44:45,041 DEBUG [main] Reservation.WorkDiv (  ResDao.java:83)     - 3.param=
+ResVO [resNum=202003070076003, resPassport=1, resEname=ear, resBir=1991-01-20, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=1, resMileage=1, resScode=20200227, uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 14:44:45,049 DEBUG [main] Reservation.WorkDiv (  ResDao.java:108)     - 4.outVO=
+null
+2020-03-15 14:44:45,079 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:89)     - ********************************
+2020-03-15 14:44:45,079 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:90)     - outVO=null
+2020-03-15 14:44:45,080 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:91)     - ********************************
+2020-03-15 14:47:21,089 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:38)     - 1.connection=oracle.jdbc.driver.T4CConnection@68f7aae2
+2020-03-15 14:47:21,091 DEBUG [main] Reservation.WorkDiv (  ResDao.java:157)     - 2.SQL(Query) :
+ UPDATE reservation            
+ SET                           
+      res_num = ?              
+      ,res_passport =   ?     
+      ,res_ename =      ?     
+      ,res_bir =        ?     
+      ,res_phone =      ?     
+      ,res_email =      ?     
+      ,res_gender =     ?     
+      ,res_state =      ?     
+      ,res_pay =        ?     
+      ,res_mileage =    ?     
+      ,res_scode =      ?     
+      ,u_num =          ?     
+ WHERE   res_num = ?      
+
+2020-03-15 14:47:21,132 DEBUG [main] Reservation.WorkDiv (  ResDao.java:160)     - 2.1.PreparedStatement : oracle.jdbc.driver.OraclePreparedStatementWrapper@21213b92
+2020-03-15 14:47:21,132 DEBUG [main] Reservation.WorkDiv (  ResDao.java:163)     - 3.param : 
+ResVO [resNum=202002230251654, resPassport=1, resEname=ear, resBir=1991-01-20, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=1, resMileage=1, resScode=20200227, uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 14:47:21,136 DEBUG [main] Reservation.WorkDiv (  ResDao.java:181)     - 4.flag : 1
+2020-03-15 14:47:21,139 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:72)     - Flag : 1
+2020-03-15 14:47:21,139 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:74)     - ===========================
+2020-03-15 14:47:21,139 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:75)     - 성공
+2020-03-15 14:47:21,139 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:76)     - ===========================
+2020-03-15 14:47:21,182 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:38)     - 1.connection=oracle.jdbc.driver.T4CConnection@3108bc
+2020-03-15 14:47:21,182 DEBUG [main] Reservation.WorkDiv (  ResDao.java:76)     - 1.connection=oracle.jdbc.driver.T4CConnection@3108bc
+2020-03-15 14:47:21,182 DEBUG [main] Reservation.WorkDiv (  ResDao.java:79)     - 2.Query= SELECT               
+     res_num,         
+     res_passport,    
+     res_ename,       
+     res_bir,         
+     res_phone,       
+     res_email,       
+     res_gender,      
+     res_state,       
+     res_pay,         
+     res_mileage,     
+     res_scode,       
+     u_num            
+ FROM                 
+     reservation      
+WHERE res_num= ?		
+2020-03-15 14:47:21,182 DEBUG [main] Reservation.WorkDiv (  ResDao.java:83)     - 3.param=
+ResVO [resNum=202002230251654, resPassport=1, resEname=ear, resBir=1991-01-20, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=1, resMileage=1, resScode=20200227, uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 14:47:21,193 DEBUG [main] Reservation.WorkDiv (  ResDao.java:108)     - 4.outVO=
+ResVO [resNum=202002230251654, resPassport=1        , resEname=ear, resBir=1991-01-20 00:00:00, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=1, resMileage=1, resScode=20200227           , uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 14:47:21,194 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:89)     - ********************************
+2020-03-15 14:47:21,194 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:90)     - outVO=ResVO [resNum=202002230251654, resPassport=1        , resEname=ear, resBir=1991-01-20 00:00:00, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=1, resMileage=1, resScode=20200227           , uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 14:47:21,195 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:91)     - ********************************
+2020-03-15 14:48:17,717 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:38)     - 1.connection=oracle.jdbc.driver.T4CConnection@68f7aae2
+2020-03-15 14:48:17,718 DEBUG [main] Reservation.WorkDiv (  ResDao.java:157)     - 2.SQL(Query) :
+ UPDATE reservation            
+ SET                           
+      res_num = ?              
+      ,res_passport =   ?     
+      ,res_ename =      ?     
+      ,res_bir =        ?     
+      ,res_phone =      ?     
+      ,res_email =      ?     
+      ,res_gender =     ?     
+      ,res_state =      ?     
+      ,res_pay =        ?     
+      ,res_mileage =    ?     
+      ,res_scode =      ?     
+      ,u_num =          ?     
+ WHERE   res_num = ?      
+
+2020-03-15 14:48:17,758 DEBUG [main] Reservation.WorkDiv (  ResDao.java:160)     - 2.1.PreparedStatement : oracle.jdbc.driver.OraclePreparedStatementWrapper@21213b92
+2020-03-15 14:48:17,758 DEBUG [main] Reservation.WorkDiv (  ResDao.java:163)     - 3.param : 
+ResVO [resNum=202002230251654, resPassport=1, resEname=ear_u, resBir=1991-01-20, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=1, resMileage=1, resScode=20200227, uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 14:48:17,761 DEBUG [main] Reservation.WorkDiv (  ResDao.java:181)     - 4.flag : 1
+2020-03-15 14:48:17,764 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:72)     - Flag : 1
+2020-03-15 14:48:17,764 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:74)     - ===========================
+2020-03-15 14:48:17,764 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:75)     - 성공
+2020-03-15 14:48:17,764 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:76)     - ===========================
+2020-03-15 14:48:17,815 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:38)     - 1.connection=oracle.jdbc.driver.T4CConnection@3108bc
+2020-03-15 14:48:17,815 DEBUG [main] Reservation.WorkDiv (  ResDao.java:76)     - 1.connection=oracle.jdbc.driver.T4CConnection@3108bc
+2020-03-15 14:48:17,815 DEBUG [main] Reservation.WorkDiv (  ResDao.java:79)     - 2.Query= SELECT               
+     res_num,         
+     res_passport,    
+     res_ename,       
+     res_bir,         
+     res_phone,       
+     res_email,       
+     res_gender,      
+     res_state,       
+     res_pay,         
+     res_mileage,     
+     res_scode,       
+     u_num            
+ FROM                 
+     reservation      
+WHERE res_num= ?		
+2020-03-15 14:48:17,815 DEBUG [main] Reservation.WorkDiv (  ResDao.java:83)     - 3.param=
+ResVO [resNum=202002230251654, resPassport=1, resEname=ear_u, resBir=1991-01-20, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=1, resMileage=1, resScode=20200227, uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 14:48:17,826 DEBUG [main] Reservation.WorkDiv (  ResDao.java:108)     - 4.outVO=
+ResVO [resNum=202002230251654, resPassport=1        , resEname=ear_u, resBir=1991-01-20 00:00:00, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=1, resMileage=1, resScode=20200227           , uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 14:48:17,827 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:89)     - ********************************
+2020-03-15 14:48:17,827 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:90)     - outVO=ResVO [resNum=202002230251654, resPassport=1        , resEname=ear_u, resBir=1991-01-20 00:00:00, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=1, resMileage=1, resScode=20200227           , uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 14:48:17,828 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:91)     - ********************************
+2020-03-15 14:49:58,799 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:38)     - 1.connection=oracle.jdbc.driver.T4CConnection@68f7aae2
+2020-03-15 14:49:58,801 DEBUG [main] Reservation.WorkDiv (  ResDao.java:157)     - 2.SQL(Query) :
+ UPDATE reservation            
+ SET                           
+      res_num = ?              
+      ,res_passport =   ?     
+      ,res_ename =      ?     
+      ,res_bir =        ?     
+      ,res_phone =      ?     
+      ,res_email =      ?     
+      ,res_gender =     ?     
+      ,res_state =      ?     
+      ,res_pay =        ?     
+      ,res_mileage =    ?     
+      ,res_scode =      ?     
+      ,u_num =          ?     
+ WHERE   res_num = ?      
+
+2020-03-15 14:49:58,839 DEBUG [main] Reservation.WorkDiv (  ResDao.java:160)     - 2.1.PreparedStatement : oracle.jdbc.driver.OraclePreparedStatementWrapper@21213b92
+2020-03-15 14:49:58,839 DEBUG [main] Reservation.WorkDiv (  ResDao.java:163)     - 3.param : 
+ResVO [resNum=202002230251654, resPassport=1, resEname=ear_u, resBir=1991-01-20, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=1, resMileage=1, resScode=20200227, uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 14:49:58,843 DEBUG [main] Reservation.WorkDiv (  ResDao.java:181)     - 4.flag : 1
+2020-03-15 14:49:58,845 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:72)     - Flag : 1
+2020-03-15 14:49:58,845 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:74)     - ===========================
+2020-03-15 14:49:58,845 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:75)     - 성공
+2020-03-15 14:49:58,845 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:76)     - ===========================
+2020-03-15 14:49:58,914 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:38)     - 1.connection=oracle.jdbc.driver.T4CConnection@3108bc
+2020-03-15 14:49:58,914 DEBUG [main] Reservation.WorkDiv (  ResDao.java:76)     - 1.connection=oracle.jdbc.driver.T4CConnection@3108bc
+2020-03-15 14:49:58,914 DEBUG [main] Reservation.WorkDiv (  ResDao.java:79)     - 2.Query= SELECT               
+     res_num,         
+     res_passport,    
+     res_ename,       
+     res_bir,         
+     res_phone,       
+     res_email,       
+     res_gender,      
+     res_state,       
+     res_pay,         
+     res_mileage,     
+     res_scode,       
+     u_num            
+ FROM                 
+     reservation      
+WHERE res_num= ?		
+2020-03-15 14:49:58,915 DEBUG [main] Reservation.WorkDiv (  ResDao.java:83)     - 3.param=
+ResVO [resNum=202002230251654, resPassport=1, resEname=ear_u, resBir=1991-01-20, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=1, resMileage=1, resScode=20200227, uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 14:49:58,924 DEBUG [main] Reservation.WorkDiv (  ResDao.java:108)     - 4.outVO=
+ResVO [resNum=202002230251654, resPassport=1        , resEname=ear_u, resBir=1991-01-20 00:00:00, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=1, resMileage=1, resScode=20200227           , uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 14:49:58,925 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:89)     - ********************************
+2020-03-15 14:49:58,925 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:90)     - outVO=ResVO [resNum=202002230251654, resPassport=1        , resEname=ear_u, resBir=1991-01-20 00:00:00, resphone=01012341234, resEmail=rokrnrepd, resWay=0, resPtype=0, resGender=1, resState=1, resPay=1, resMileage=1, resScode=20200227           , uNum=123, toString()=DTO [pageSize=0, pageNum=0, total=0, num=0]]
+2020-03-15 14:49:58,926 DEBUG [main] Reservation.ResDAOMain (ResDAOMain.java:91)     - ********************************

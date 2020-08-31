@@ -1,0 +1,10 @@
+eclipse.preferences.version=1
+encoding//WebContent/LoginProcess.jsp=UTF-8
+encoding//WebContent/Payment.jsp=UTF-8
+encoding//WebContent/index.jsp=UTF-8
+encoding//WebContent/naverCallback.jsp=UTF-8
+encoding//WebContent/naverLogin.jsp=UTF-8
+encoding//src/User/UserDao.java=UTF-8
+encoding//src/User/UserVO.java=UTF-8
+encoding//src/com/hr/cmn/SearchVO.java=UTF-8
+encoding/<project>=UTF-8
