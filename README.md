@@ -1,5 +1,6 @@
 # SistAirlines-Project
 [쌍용강북교육센터] 2차 프로젝트 : Sist Airlines (프로젝트 기간 : 2020.01 - 2020.03)
+  
 JSP를 활용한 항공권 예매 시스템
 
 
