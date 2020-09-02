@@ -105,5 +105,5 @@ JSP를 활용한 항공권 예매 시스템
 ![SistAirlines_기본설계서.png](https://github.com/MIN-04/SistAirlines-Project/blob/master/SistAirLine/doc/SistAirlines_%EA%B8%B0%EB%B3%B8%EC%84%A4%EA%B3%84%EC%84%9C.png "SistAirlines_기본설계서.png")  
 
 ### 8. 시연 동영상
-[![Sist Airlines](https://i9.ytimg.com/vi/A1TNlvXQtGA/mq3.jpg?sqp=COTAs_oF&rs=AOn4CLDs9tFCOlxQ7OJsd-zAP5XMcRcw6Q)](https://youtu.be/A1TNlvXQtGA)
+[![Sist Airlines](https://github.com/MIN-04/SistAirlines-Project/blob/master/SistAirLine/doc/SistAirlines_MainPage.png)](https://youtu.be/A1TNlvXQtGA)
 
